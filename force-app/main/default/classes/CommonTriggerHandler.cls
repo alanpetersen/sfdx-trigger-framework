@@ -5,12 +5,15 @@ public with sharing class CommonTriggerHandler {
 
 // the main method to invoke the trigger handler
   public static void invoke() {
+    System.debug('### CommonTriggerHandler.invoke()');
     // get the name of the SObject
     String objName = determineSObjectName();
+    System.debug('### SObject: ' + objName);
     // check to see if the trigger is enabled
     if(objName != null) {
       // retrieve the TriggerHandler custom metadata records for the SObject
       for(TriggerHandler__mdt triggerHandler:[SELECT Label, Order__c FROM TriggerHandler__mdt WHERE SObjectType__c = :objName ORDER BY Order__c ]) {
+        System.debug('### calling ' + triggerHandler.Label);
         Callable handler = (Callable)Type.forName(triggerHandler.Label).newInstance();
         handler.call(null,null);
       }
@@ -22,7 +25,7 @@ public with sharing class CommonTriggerHandler {
     List < SObject >newList = Trigger.new;
     List < SObject >oldList = Trigger.old;
     String sObjectName = null;
-    if(newList.size() > 0) {
+    if(newList != null && newList.size() > 0) {
       sObjectName = newList[0].getSObjectType().getDescribe().name;
     } else if(oldList.size() > 0) {
       sObjectName = oldList[0].getSObjectType().getDescribe().name;

@@ -11,11 +11,11 @@ public with sharing class SampleAccountTriggerHelper {
     System.debug('### AFTER INSERT');
   }
 
-  public static void doSomethingBeforeUpdate(List<Account> accounts, Map<Id,Account> oldAccountMap) {
+  public static void doSomethingBeforeUpdate(List<Account> oldAccounts, List<Account> updatedAccounts, Map<Id,SObject> accountMap) {
     System.debug('### BEFORE UPDATE');
   }
 
-  public static void doSomethingAfterUpdate(List<Account> accounts, Map<Id,Account> oldAccountMap) {
+  public static void doSomethingAfterUpdate(List<Account> oldAccounts, List<Account> updatedAccounts, Map<Id,SObject> accountMap) {
     System.debug('### AFTER UPDATE');
   }
 
@@ -25,10 +25,6 @@ public with sharing class SampleAccountTriggerHelper {
 
   public static void doSomethingAfterDelete(List<Account> deletedAccounts) {
     System.debug('### AFTER DELETE');
-  }
-
-  public static void doSomethingBeforeUndelete(List<Account> accounts) {
-    System.debug('### BEFORE UNDELETE');
   }
 
   public static void doSomethingAfterUndelete(List<Account> accounts) {

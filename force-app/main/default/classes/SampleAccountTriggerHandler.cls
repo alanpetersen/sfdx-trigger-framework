@@ -6,20 +6,20 @@ public with sharing class SampleAccountTriggerHandler implements Callable {
 
     System.debug('==== SampleAccountTriggerHandler');
 
-    // If action is Before Insert
     if(Trigger.isBefore && Trigger.isInsert) {
-      SampleAccountTriggerHelper.checkForRestrictedAttachments(Trigger.new);
-      CoreBaseFeedItemTriggerHelper.preventSharingPosts(Trigger.new);
-
-      // If action is After Insert
+      SampleAccountTriggerHelper.doSomethingBeforeInsert(Trigger.new);
     } else if(Trigger.isAfter && Trigger.isInsert) {
-      SampleAccountTriggerHelper.insertDeletedChatterRecord(Trigger.new);
-      CoreBaseFeedItemTriggerHelper.emailChatterPosts(Trigger.new);
-
-      // If action is Before Delete
+      SampleAccountTriggerHelper.doSomethingAfterInsert(Trigger.new);
+    } else if(Trigger.isBefore && Trigger.isUpdate) {
+      SampleAccountTriggerHelper.doSomethingBeforeUpdate(Trigger.old, Trigger.new, Trigger.oldMap);
+    } else if(Trigger.isAfter && Trigger.isUpdate) {
+      SampleAccountTriggerHelper.doSomethingAfterUpdate(Trigger.old, Trigger.new, Trigger.oldMap);
     } else if(Trigger.isBefore && Trigger.isDelete) {
-      SampleAccountTriggerHelper.preventDeletion(Trigger.old);
-
+      SampleAccountTriggerHelper.doSomethingBeforeDelete(Trigger.old);
+    } else if(Trigger.isAfter && Trigger.isDelete) {
+      SampleAccountTriggerHelper.doSomethingAfterDelete(Trigger.old);
+    } else if(Trigger.isAfter && Trigger.isUndelete) {
+      SampleAccountTriggerHelper.doSomethingAfterUndelete(Trigger.new);
     }
 
     return null;
