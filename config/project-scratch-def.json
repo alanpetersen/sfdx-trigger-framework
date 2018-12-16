@@ -1,0 +1,10 @@
+{
+  "orgName": "sfdxtriggerframework",
+  "edition": "Enterprise",
+  "orgPreferences": {
+    "enabled": [
+      "S1DesktopEnabled",
+      "ChatterEnabled"
+    ]
+  }
+}
