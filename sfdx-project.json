@@ -4,10 +4,15 @@
   "sfdcLoginUrl": "https://login.salesforce.com",
   "plugins": {
     "appiriodx": {
-      "packages": [],
+      "packages": [{
+        "name": "TriggerFrameworkBase",
+        "description": "Base package for the trigger framework",
+        "packageType": "Unlocked",
+        "path": "force-app"
+      }],
       "permissionSets": [],
       "sampleData": {
-        "planFiles": ["data/data-import-plan.json"],
+        "planFiles": [],
         "sObjectFiles": []
       }
     }
